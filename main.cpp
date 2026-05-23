@@ -1,8 +1,8 @@
 #include <iostream>
-#include <array>
+#include "hotel.h"
 
 int main() {
-    
+    hotel *h = hotel::getInstanta();
     
     return 0;
 }
