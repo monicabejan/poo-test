@@ -8,5 +8,5 @@ hotel* hotel::getInstanta() {
 }
 
 void hotel::doarAsa() {
-  cout<<" ";
+  std::cout<<" ";
 }
