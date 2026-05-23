@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-hotel* hotel::getInstanta() }
+hotel* hotel::getInstanta() {
   static hotel instantaUnica;
   return &instantaUnica;
 }
