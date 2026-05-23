@@ -10,6 +10,9 @@ class hotel{
 public:
   static hotel* getInstanta();
 
+  void doarAsa();
+    
+
 };
 
 #endif
