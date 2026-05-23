@@ -3,6 +3,6 @@
 
 int main() {
     hotel *h = hotel::getInstanta();
-    
+    h->doarAsa();
     return 0;
 }
