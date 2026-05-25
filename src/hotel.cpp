@@ -59,12 +59,12 @@ void hotel::proceseazaSelectieCamera(int nrCam, int nopti, const std::string& nu
   }
   if(cameraGasita->esteOcupata()){
     throw exceptieCameraDejaOcupata(nrCam);
-
+  }
     rezervare rez(numeClient, nopti);
 
     cameraGasita->setStatus(true);
     istoricRezervari.push_back(rez);
-  }
+  
 }
 
 void hotel::afisareIstoricRezervari() const{
