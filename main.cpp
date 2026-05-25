@@ -41,5 +41,24 @@ int main() {
     h->creeazaCamera<cameraSingle>(2,2, 200);
     h->creeazaCamera<cameraDouble>(2,2,"matrimonial", 200);
     h->afisareCamereLibere();
+
+    persoana* utilizatorLogat = nullptr;
+    int optiune = 0;
+
+    do {
+        std::cout<<"\nMENIU INTERACTIV\n";
+        std::cout<<"\n0. Exit";
+        std::cout<<"\n1. Login";
+        std::cout<<"\n2. Sign-up";
+        std::cout<<"\nOptiune: ";
+        std::cin>>optiune;
+
+        if(optiune==1){std::cout<<"Meniu login";}
+        else if(optiune==2) {std::cout<<"Meniu sign up";}
+        else if(optiune==0) {std::cout<<"Exit;"}
+        else std::cout<<"\nOptiune invalida\n";
+    } while (utilizatorLogat == nullptr && optiune != 0);
+    
+
     return 0;
 }
