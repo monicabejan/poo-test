@@ -12,6 +12,7 @@ private:
     void afiseazaMeniuInitial() const;
     void afiseazaMeniuAngajat();
     void afiseazaMeniuClient();
+    void afisareSubmeniuRezervare();
     
     void login();
     void signup();

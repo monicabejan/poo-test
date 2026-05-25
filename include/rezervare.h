@@ -12,6 +12,8 @@ public:
     rezervare(const std::string & nume, int nopti);
     int getID() {return idRezervare;}
     int getNrNopti() {return nrNopti;}
+
+    friend std::ostream& operator<<(std::ostream& os, const rezervare& rez);
 };
 
 #endif

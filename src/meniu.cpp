@@ -1,9 +1,16 @@
 #include "../include/meniu.h"
 #include "../include/hotel.h"
+#include "../include/exceptii.h"
 #include <iostream>
 #include <string>
 
 hotel *h = hotel::getInstanta();
+
+void curataBuffer() {
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+}
+
 
 void meniu::afiseazaMeniuInitial() const{
     std::cout<<"\nMENIU INTERACTIV\n";
@@ -12,6 +19,7 @@ void meniu::afiseazaMeniuInitial() const{
     std::cout<<"\n2. Sign-up";
     std::cout<<"\nOptiune: ";
 }
+
 
 void meniu::login(){
     int idCautat;
@@ -22,15 +30,17 @@ void meniu::login(){
     std::cout<<"\nParola: ";
     std::cin>>parolaIntrodusa;
 
-    auto utilizatorGasit = h->identificareUtilizator(idCautat, parolaIntrodusa);
-    if (utilizatorGasit!=nullptr) {
-        utilizatorLogat = utilizatorGasit;
-        std::cout << "\nWelcome, " << utilizatorLogat->getNume() << "\n";
-    } else {
-        std::cout << "\nID sau parola incorecte\n";
-        utilizatorLogat = nullptr;
+    try{
+        utilizatorLogat = h->identificareUtilizator(idCautat, parolaIntrodusa);
+        std::cout<<"\nWelcome, "<<utilizatorLogat->getNume() <<"\n";
+    }
+    catch(const exceptieAutentificareEsuata& e) {
+        std::cout<<"\nEroare: "<<e.what()<<"\n";
+        utilizatorLogat=nullptr;    
     }
 }
+
+
 
 void meniu::signup(){
     std::string nume, prenume, parola, abonament;
@@ -49,6 +59,8 @@ void meniu::signup(){
     
 }
 
+
+
 void meniu::afiseazaMeniuAngajat(){
     int optiune = 0;
     
@@ -57,24 +69,34 @@ void meniu::afiseazaMeniuAngajat(){
         std::cout << "0. Exit\n";
         std::cout << "1. Afiseaza toate camerele\n";
         std::cout << "2. Adauga o camera noua\n";
-        
+        std::cout << "3. Istoric rezervari\n";
         std::cout << "Optiune: ";
+
         std::cin >> optiune;
 
-        if (optiune == 1) {
-            h->afisareCamereLibere();
-        } else if (optiune == 2) {
-            // hotel.creeazaCamera<cameraDouble>(...)
+        switch (optiune) {
+            case 0:
+                std::cout << "\nLogging out\n";
+                break;
+            case 1:
+                h->afisareCamereLibere();
+                break;
+            case 2:
+                std::cout << "\n";
+                break;
+            case 3:
+                h->afisareIstoricRezervari();
+                break;
+            default:
+                std::cout << "Optiune invalida. Incercati din nou.\n";
+                break;
         }
-        else if (optiune == 0){
-            std::cout<<"exit";
-
-        }
-        else std::cout<<"Invalid";
     }while (optiune != 0) ;
 
     utilizatorLogat = nullptr;
 }
+
+
 
 void meniu::afiseazaMeniuClient(){
     int optiune = 0;
@@ -82,26 +104,86 @@ void meniu::afiseazaMeniuClient(){
     do{
         std::cout << "\nMENIU CLIENT\n";
         std::cout << "0. Exit\n";
-        std::cout << "1. Afiseaza toate camerele\n";
-        std::cout << "2. Rezervare\n";
-        
+        std::cout << "1. Vezi camerele libere\n";
+        std::cout << "2. Rezervare\n"; 
         std::cout << "Optiune: ";
+
         std::cin >> optiune;
 
-        if (optiune == 1) {
-            h->afisareCamereLibere();
-        } else if (optiune == 2) {
-            // hotel.rezervaCamerainSesiune()
+       switch (optiune) {
+            case 0:
+                std::cout << "\nLogging out\n";
+                break;
+            case 1:
+                h->afisareCamereLibere();
+                break;
+            case 2:
+                afisareSubmeniuRezervare(); 
+                break;
+            default:
+                std::cout << "Optiune invalida. Incercati din nou\n";
+                break;
         }
-        else if (optiune == 0){
-            std::cout<<"exit";
-
-        }
-        else std::cout<<"Invalid";
     }while (optiune != 0) ;
 
     utilizatorLogat = nullptr;
 }
+
+
+void meniu::afisareSubmeniuRezervare(){
+    int optiune=0;
+    int nopti=0;
+
+    std::cout<<"\nREZERVARE NOUA\n";
+    std::cout<<"\nNr nopti: ";
+    std::cin>>nopti;
+
+    do {
+        h->afisareCamereLibere();
+
+        std::cout << "\nREZERVARE CURENTA\n";
+        std::cout << "1. Adauga camera la rezervare\n";
+        std::cout << "2. Adauga Servicii Optionale\n";
+        std::cout << "0. Finalizeaza\n";
+        std::cout << "Optiune: ";
+        
+        switch (optiune) {
+            case 0:
+                std::cout << "\nAfisare detalii\n";
+                break;
+            case 1: { 
+                int nrCam;
+                std::cout << "Camera: ";
+                std::cin >> nrCam;
+
+                try {
+                    std::string numeComplet = utilizatorLogat->getNume() + " " + utilizatorLogat->getPrenume();
+                    h->proceseazaSelectieCamera(nrCam, nopti, numeComplet);
+                    
+                    std::cout << "\nCamera " << nrCam << " a fost adaugata in rezervare\n";
+                } 
+                catch (const exceptieCameraInexistenta& e) {
+                    std::cout << "\nEroare: " << e.what() << "\n";
+                } 
+                catch (const exceptieCameraDejaOcupata& e) {
+                    std::cout << "\nEroare: " << e.what() << "\n";
+                } 
+                catch (const std::invalid_argument& e) {
+                    std::cout << "\nEroare: " << e.what() << "\n";
+                }
+                break;
+            }
+            case 2:
+                std::cout << "\n";
+                break;
+            default:
+                std::cout << "\nOptiune invalida\n";
+                break;
+        }
+
+    } while (optiune != 0);
+}
+
 
 void meniu::ruleaza() {
     int optiune = 0;
@@ -111,11 +193,12 @@ void meniu::ruleaza() {
             afiseazaMeniuInitial();
             std::cin>>optiune;
 
-            if (optiune == 1) login();
-            else if (optiune == 2) signup();
-            else if (optiune == 0) std::cout<<"exit\n";
-            else { std::cout<<"\nOptiune invalida";}
-       
+            switch (optiune) {
+                case 0: std::cout << "\nExit\n"; break;
+                case 1: login(); break;
+                case 2: signup(); break;
+                default: std::cout << "Optiune invalida!\n"; break;
+            }
         } else {
             if (std::dynamic_pointer_cast<angajat>(utilizatorLogat) != nullptr) {
                 afiseazaMeniuAngajat();

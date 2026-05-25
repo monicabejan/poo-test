@@ -1,4 +1,5 @@
 #include "../include/hotel.h"
+#include "../include/exceptii.h"
 
 #include <iostream>
 
@@ -41,5 +42,38 @@ std::shared_ptr<persoana> hotel::identificareUtilizator(int idCautat, const std:
     if(u-> getID() == idCautat && u->getParola() == parolaIntrodusa)
       return u;
   }
-  return nullptr;
+  throw exceptieAutentificareEsuata();
+}
+
+void hotel::proceseazaSelectieCamera(int nrCam, int nopti, const std::string& numeClient){
+  std::shared_ptr<camera> cameraGasita=nullptr;
+
+  for(auto& cam : camere) {
+    if(cam->getNrCamera()==nrCam){
+      cameraGasita=cam;
+      break;
+    }
+  }
+  if(cameraGasita==nullptr){
+    throw exceptieCameraInexistenta(nrCam);
+  }
+  if(cameraGasita->esteOcupata()){
+    throw exceptieCameraDejaOcupata(nrCam);
+
+    rezervare rez(numeClient, nopti);
+
+    cameraGasita->setStatus(true);
+    istoricRezervari.push_back(rez);
+  }
+}
+
+void hotel::afisareIstoricRezervari() const{
+  std::cout<<"\nISTORIC REZERVARI\n";
+  if(istoricRezervari.empty()){
+    std::cout<<"\nNicio rezervare inregistrata\n";
+    return;
+  }
+  for(const auto& rez : istoricRezervari){
+    std::cout<<rez<<"\n";
+  }
 }

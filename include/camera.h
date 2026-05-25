@@ -12,9 +12,13 @@ protected:
 public:
     camera(int nr, int et, double p, bool status = false) : nrCamera(nr), etaj(et), pret(p), status(status) {}
     int esteOcupata() const {return status;}
+    int getNrCamera() const {return nrCamera;}
+    void setStatus(bool st){status=st;}
+
     virtual std::string getTip() const =0;
     friend std::ostream& operator<<(std::ostream& os, const camera& c); 
     virtual ~camera()=default;
+
     virtual void afisareDetalii (std::ostream& os) const =0;
 };
 
