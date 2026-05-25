@@ -1,15 +1,20 @@
 #include <iostream>
-#include "hotel.h"
-#include "persoana.h"
-#include "camera.h"
+#include "../include/hotel.h"
+#include "../include/persoana.h"
+#include "../include/camera.h"
+#include "../include/rezervare.h"
 
 int main() {
     hotel *h = hotel::getInstanta();
     h->doarAsa();
-    persoana p(1,"ana","maria");
+
+    persoana p("ana","maria");
     int i=p.getID();
     std::cout<<i;
+
     camera c(1,1,1);
     std::cout<<c.esteOcupata();
+
+    rezervare rez("ana", 2);
     return 0;
 }

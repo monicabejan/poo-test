@@ -1,3 +1,3 @@
-#include "camera.h"
+#include "../include/camera.h"
 
 #include <iostream>

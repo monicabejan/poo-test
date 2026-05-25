@@ -13,7 +13,7 @@ protected:
 
 public:
     int getID() const { return id; }
-    persoana(int id, const std::string& nume, const std::string& prenume) : id(id), nume(nume), prenume(prenume) {}; 
+    persoana(const std::string& nume, const std::string& prenume) : nume(nume), prenume(prenume){ this->id=contorID++;}
     void doSomething () ;
 };
 

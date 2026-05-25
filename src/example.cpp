@@ -1,4 +1,4 @@
-#include "example.h"
+#include "../include/example.h"
 
 // cppcheck-suppress unusedFunction
 int doSomething(int x) {
