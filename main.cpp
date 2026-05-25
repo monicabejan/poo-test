@@ -24,5 +24,6 @@ int main() {
 
     cameraSingle cs(1,1,1);
     std::cout<<cs.getTip();
+    std::cout<<cs.esteOcupata();
     return 0;
 }
