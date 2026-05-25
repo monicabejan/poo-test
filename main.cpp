@@ -4,6 +4,7 @@
 #include "../include/camera.h"
 #include "../include/rezervare.h"
 #include "../include/serviciu.h"
+#include "../include/exceptii.h"
 
 int main() {
     hotel *h = hotel::getInstanta();
