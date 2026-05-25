@@ -2,6 +2,7 @@
 #define PERSOANA_H
 
 #include <iostream>
+#include <string>
 
 
 class persoana {
@@ -21,12 +22,18 @@ public:
 
 
 class client: public persoana {
-
+    std::string tipAbonament;
+public:
+    ~client() override = default;
+    client(const std::string& nume, const std::string& prenume, const std::string& abonament): persoana(nume, prenume), tipAbonament(abonament) {}
 };
 
 
 class angajat: public persoana{
-
+    double salariu;
+public:
+    ~angajat() override = default;
+    angajat(const std::string& nume, const std::string& prenume, double sal) : persoana(nume, prenume), salariu(sal) {}
 };
 
 #endif
