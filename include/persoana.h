@@ -15,6 +15,7 @@ public:
     int getID() const { return id; }
     persoana(const std::string& nume, const std::string& prenume) : nume(nume), prenume(prenume){ this->id=contorID++;}
     void doSomething () ;
+    virtual ~persoana()=default;
 };
 
 

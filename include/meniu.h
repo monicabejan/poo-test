@@ -17,6 +17,7 @@ private:
     void signup();
 
 public:
+    meniu()=default;
     void ruleaza(); 
 };
 
