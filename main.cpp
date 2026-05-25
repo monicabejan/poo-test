@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <fstream>
 #include "../include/hotel.h"
 #include "../include/persoana.h"
 #include "../include/camera.h"
@@ -10,6 +11,10 @@
 #include "../include/meniu.h"
 
 int main() {
+
+    std::ifstream fisierInput("tastatura.txt");
+    std::cin.rdbuf(fisierInput.rdbuf());
+
     hotel *h = hotel::getInstanta();
     h->doarAsa();
 

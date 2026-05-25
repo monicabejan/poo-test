@@ -1,1 +1,7 @@
+1
+100
+parola
+2
+ana
+maria
 0
