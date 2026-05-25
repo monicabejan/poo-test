@@ -7,7 +7,7 @@
 
 class meniu {
 private:
-    persoana* utilizatorLogat;
+    persoana* utilizatorLogat=nullptr;
 
     void afiseazaMeniuInitial() const;
     void afiseazaMeniuAngajat();
