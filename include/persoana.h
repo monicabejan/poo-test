@@ -19,4 +19,13 @@ public:
 
 
 
+class client: public persoana {
+
+};
+
+
+class angajat: public persoana{
+
+};
+
 #endif
