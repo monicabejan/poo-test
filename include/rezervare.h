@@ -11,6 +11,7 @@ class rezervare{
 public:
     rezervare(const std::string & nume, int nopti);
     int getID() {return idRezervare;}
+    int getNrNopti() {return nrNopti;}
 };
 
 #endif
