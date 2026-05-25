@@ -56,7 +56,7 @@ void meniu::afiseazaMeniuAngajat(){
 
         }
         else std::cout<<"Invalid";
-    }while (optiune != 0) 
+    }while (optiune != 0) ;
 
     utilizatorLogat = nullptr;
 }
@@ -83,7 +83,7 @@ void meniu::afiseazaMeniuClient(){
 
         }
         else std::cout<<"Invalid";
-    }while (optiune != 0) 
+    }while (optiune != 0) ;
 
     utilizatorLogat = nullptr;
 }
