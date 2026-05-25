@@ -25,5 +25,9 @@ int main() {
     cameraSingle cs(1,1,1);
     std::cout<<cs.getTip();
     std::cout<<cs.esteOcupata();
+
+    cameraDouble cd (1,1,"twin", 5);
+    std::cout<<cd.getTip();
+    std::cout<<cd.esteOcupata();
     return 0;
 }

@@ -16,6 +16,7 @@ public:
 };
 
 
+
 class cameraSingle : public camera{
 public:
     cameraSingle(int nr, int et, double p=150.0):camera(nr, et, p) {}
@@ -24,5 +25,13 @@ public:
 };
 
 
+
+class cameraDouble : public camera{
+    std::string tipConfiguratie;
+public:
+    cameraDouble(int nr, int et, const std::string& config, double p=250.0) : camera(nr, et, p), tipConfiguratie(config) {}
+    std::string getTip() const override { return "Double";}
+
+};
 
 #endif
