@@ -57,6 +57,7 @@ int main() {
 
     angajat ang("nume", "prenume", 1000);
     std::cout<<ang.getSalariu();
+    
     meniu Meniu;
     Meniu.ruleaza();
 

@@ -7,7 +7,7 @@
 
 class meniu {
 private:
-    persoana* utilizatorLogat=nullptr;
+    std::shared_ptr<persoana> utilizatorLogat=nullptr;
 
     void afiseazaMeniuInitial() const;
     void afiseazaMeniuAngajat();

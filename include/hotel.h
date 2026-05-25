@@ -12,9 +12,9 @@
 class hotel{
   std::vector<std::shared_ptr<camera>> camere;
   std::vector<rezervare> istoricRezervari;
-  std::vector<std::shared_ptr<angajat>> angajati;
+  std::vector<std::shared_ptr<persoana>> utilizatori;
 
-  hotel () {}
+  hotel ();
   hotel(const hotel &) = delete;
   hotel& operator=(const hotel&)=delete; // prevenim copierea (Singleton)
 
@@ -25,6 +25,9 @@ public:
   void doarAsa();
 
   void afisareCamereLibere() const;
+
+  int adaugaClientNou(const std::string& nume, const std::string& prenume, const std::string& parola, const std::string& tipAbonament);
+  std::shared_ptr<persoana> identificareUtilizator(int idCautat, const std::string& parolaIntrodusa);
   
   template <typename T, typename... Args>
     void creeazaCamera(Args&&... args){

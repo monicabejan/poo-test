@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+hotel::hotel() {
+  auto angajatImplicit = std::make_shared<angajat>("Popa", "Andrei", 4000.0);
+  utilizatori.push_back(angajatImplicit);
+}
+
 hotel* hotel::getInstanta() {
   static hotel instantaUnica;
   return &instantaUnica;
@@ -23,4 +28,18 @@ void hotel::afisareCamereLibere() const{
   }
   if(!existaLibere)
     std::cout<<"\nNicio camera disponibila\n";
+}
+
+int hotel::adaugaClientNou( const std::string& nume, const std::string& prenume, const std::string& parola, const std::string& abonament){
+  auto clientNou =std::make_shared<client>(nume, prenume, abonament, parola);
+  utilizatori.push_back(clientNou);
+  return clientNou->getID();
+}
+
+std::shared_ptr<persoana> hotel::identificareUtilizator(int idCautat, const std::string& parolaIntrodusa){
+  for(const auto& u : utilizatori){
+    if(u-> getID() == idCautat && u->getParola() == parolaIntrodusa)
+      return u;
+  }
+  return nullptr;
 }

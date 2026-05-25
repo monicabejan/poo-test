@@ -1,5 +1,5 @@
-#include "meniu.h"
-#include "hotel.h"
+#include "../include/meniu.h"
+#include "../include/hotel.h"
 #include <iostream>
 #include <string>
 
@@ -21,17 +21,32 @@ void meniu::login(){
     std::cin>>idCautat;
     std::cout<<"\nParola: ";
     std::cin>>parolaIntrodusa;
+
+    auto utilizatorGasit = h->identificareUtilizator(idCautat, parolaIntrodusa);
+    if (utilizatorGasit!=nullptr) {
+        utilizatorLogat = utilizatorGasit;
+        std::cout << "\nWelcome, " << utilizatorLogat->getNume() << "\n";
+    } else {
+        std::cout << "\nID sau parola incorecte\n";
+        utilizatorLogat = nullptr;
+    }
 }
 
 void meniu::signup(){
-    std::string nume, prenume;
+    std::string nume, prenume, parola, abonament;
     std::cout<<"\nNume: ";
     std::cin>>nume;
     std::cout<<"\nPrenume: ";
     std::cin>>prenume;
+    std::cout<<"Parola: ";
+    std::cin>>parola;
+    std::cout<<"Tip Abonament (Regular/Silver/Gold): ";
+    std::cin>>abonament;
 
-    //int idNou = hotel.adaugaClientNou(nume, prenume);
-    //std::cout << "Cont creat cu succes! ID-ul tau de login este: " << idNou << "\n";
+    int idNou = h->adaugaClientNou(nume, prenume, parola, abonament);
+    std::cout << "ID-ul tau de login este: " << idNou << "\n";
+   
+    
 }
 
 void meniu::afiseazaMeniuAngajat(){
@@ -99,12 +114,14 @@ void meniu::ruleaza() {
             if (optiune == 1) login();
             else if (optiune == 2) signup();
             else if (optiune == 0) std::cout<<"exit\n";
+            else { std::cout<<"\nOptiune invalida";}
+       
         } else {
-            if (dynamic_cast<angajat*>(utilizatorLogat) != nullptr) {
+            if (std::dynamic_pointer_cast<angajat>(utilizatorLogat) != nullptr) {
                 afiseazaMeniuAngajat();
             } else {
                 afiseazaMeniuClient();
             }
         }
-    }while (optiune != 0) ;
+    }while (optiune != 0 || utilizatorLogat != nullptr) ;
 }
