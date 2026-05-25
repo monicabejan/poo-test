@@ -7,6 +7,7 @@
 #include "../include/rezervare.h"
 #include "../include/serviciu.h"
 #include "../include/exceptii.h"
+#include "../include/meniu.h"
 
 int main() {
     hotel *h = hotel::getInstanta();
@@ -42,23 +43,9 @@ int main() {
     h->creeazaCamera<cameraDouble>(2,2,"matrimonial", 200);
     h->afisareCamereLibere();
 
-    persoana* utilizatorLogat = nullptr;
-    int optiune = 0;
-
-    do {
-        std::cout<<"\nMENIU INTERACTIV\n";
-        std::cout<<"\n0. Exit";
-        std::cout<<"\n1. Login";
-        std::cout<<"\n2. Sign-up";
-        std::cout<<"\nOptiune: ";
-        std::cin>>optiune;
-
-        if(optiune==1){std::cout<<"Meniu login";}
-        else if(optiune==2) {std::cout<<"Meniu sign up";}
-        else if(optiune==0) {std::cout<<"Exit;"}
-        else std::cout<<"\nOptiune invalida\n";
-    } while (utilizatorLogat == nullptr && optiune != 0);
     
+    meniu Meniu(*h);
+    Meniu.ruleaza();
 
     return 0;
 }
