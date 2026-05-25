@@ -6,10 +6,10 @@
 
 hotel *h = hotel::getInstanta();
 
-void curataBuffer() {
-    std::cin.clear();
-    std::cin.ignore(10000, '\n');
-}
+// void curataBuffer() {
+//     std::cin.clear();
+//     std::cin.ignore(10000, '\n');
+// }
 
 
 void meniu::afiseazaMeniuInitial() const{
@@ -146,6 +146,7 @@ void meniu::afisareSubmeniuRezervare(){
         std::cout << "2. Adauga Servicii Optionale\n";
         std::cout << "0. Finalizeaza\n";
         std::cout << "Optiune: ";
+        std::cin>>optiune;
         
         switch (optiune) {
             case 0:

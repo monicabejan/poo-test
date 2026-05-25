@@ -48,7 +48,7 @@ std::shared_ptr<persoana> hotel::identificareUtilizator(int idCautat, const std:
 void hotel::proceseazaSelectieCamera(int nrCam, int nopti, const std::string& numeClient){
   std::shared_ptr<camera> cameraGasita=nullptr;
 
-  for(auto& cam : camere) {
+  for(const auto& cam : camere) {
     if(cam->getNrCamera()==nrCam){
       cameraGasita=cam;
       break;
