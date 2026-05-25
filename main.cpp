@@ -49,7 +49,13 @@ int main() {
     h->creeazaCamera<cameraDouble>(2,2,"matrimonial", 200);
     h->afisareCamereLibere();
 
-    
+    client cli("nume", "prenume", "silver");
+    std::cout<<cli.getNume();
+    std::cout<<cli.getPrenume();
+    std::cout<<cli.getTipAbonament();
+
+    angajat ang("nume", "prenume", 1000);
+    std::cout<<ang.getSalariu();
     meniu Meniu;
     Meniu.ruleaza();
 
