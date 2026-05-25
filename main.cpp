@@ -50,6 +50,7 @@ int main() {
     h->afisareCamereLibere();
 
     client cli("nume", "prenume", "silver");
+    cli.upgradeAbonament("golden");
     std::cout<<cli.getNume();
     std::cout<<cli.getPrenume();
     std::cout<<cli.getTipAbonament();

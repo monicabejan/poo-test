@@ -18,8 +18,8 @@ public:
     void doSomething () ;
     virtual ~persoana()=default;
 
-    std::string getNume() const {return nume;}
-    std::string getPrenume() const {return prenume;}
+    std::string& getNume() const {return nume;}
+    std::string& getPrenume() const {return prenume;}
 };
 
 
@@ -30,7 +30,8 @@ public:
     ~client() override = default;
     client(const std::string& nume, const std::string& prenume, const std::string& abonament): persoana(nume, prenume), tipAbonament(abonament) {}
 
-    std::string getTipAbonament() const {return tipAbonament;}
+    std::string& getTipAbonament() const {return tipAbonament;}
+    void upgradeAbonament(const std::string& abNou) { tipAbonament = abNou; }
 
 };
 
