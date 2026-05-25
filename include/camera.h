@@ -12,6 +12,17 @@ protected:
 public:
     camera(int nr, int et, double p, bool status = false) : nrCamera(nr), etaj(et), pret(p), status(status) {}
     int esteOcupata() const {return status;}
+    virtual std::string getTip() const =0;
 };
+
+
+class cameraSingle : public camera{
+public:
+    cameraSingle(int nr, int et, double p=150.0):camera(nr, et, p) {}
+    std::string getTip() const override { return "Single";}
+
+};
+
+
 
 #endif

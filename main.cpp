@@ -14,9 +14,6 @@ int main() {
     int i=p.getID();
     std::cout<<i;
 
-    camera c(1,1,1);
-    std::cout<<c.esteOcupata();
-
     rezervare rez("ana",2);
     std::cout<<rez.getID();
     std::cout<<rez.getNrNopti();
@@ -24,5 +21,8 @@ int main() {
     serviciu s("laundry", 20);
     std::cout<<s.getDenumire();
     std::cout<<s.getPret();
+
+    cameraSingle cs(1,1,1);
+    std::cout<<cs.getTip();
     return 0;
 }
