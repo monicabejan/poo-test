@@ -6,6 +6,6 @@ int main() {
     hotel *h = hotel::getInstanta();
     h->doarAsa();
     persoana p;
-    p.doSomething();
+    int i=p.getId();
     return 0;
 }

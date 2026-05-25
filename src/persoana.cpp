@@ -5,3 +5,5 @@
 void persoana::doSomething(){
     std::cout<<" ";
 }
+
+int persoana::contorID = 100;
