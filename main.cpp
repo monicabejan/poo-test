@@ -15,6 +15,7 @@ int main() {
     camera c(1,1,1);
     std::cout<<c.esteOcupata();
 
-    
+    rezervare rez("ana",2);
+    std::cout<<rez.getID();
     return 0;
 }
