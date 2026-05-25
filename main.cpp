@@ -44,7 +44,7 @@ int main() {
     h->afisareCamereLibere();
 
     
-    meniu Meniu(*h);
+    meniu Meniu;
     Meniu.ruleaza();
 
     return 0;

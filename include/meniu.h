@@ -7,7 +7,6 @@
 
 class meniu {
 private:
-    hotel& m_hotel;
     persoana* utilizatorLogat;
 
     void afiseazaMeniuInitial() const;
@@ -18,7 +17,6 @@ private:
     void signup();
 
 public:
-    explicit meniu(hotel& instantaHotel): m_hotel(instantaHotel), utilizatorLogat(nullptr) {}
     void ruleaza(); 
 };
 
