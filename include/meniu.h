@@ -18,7 +18,7 @@ private:
     void signup();
 
 public:
-    meniu(hotel& instantaHotel): m_hotel(instantaHotel), utilizatorLogat(nullptr) {}
+    explicit meniu(hotel& instantaHotel): m_hotel(instantaHotel), utilizatorLogat(nullptr) {}
     void ruleaza(); 
 };
 

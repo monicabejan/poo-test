@@ -1,6 +1,4 @@
 #include "meniu.h"
-#include "angajat.h"
-#include "client.h"
 #include "hotel.h"
 #include <iostream>
 #include <string>
