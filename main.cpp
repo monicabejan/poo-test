@@ -29,5 +29,11 @@ int main() {
     cameraDouble cd (1,1,"twin", 5);
     std::cout<<cd.getTip();
     std::cout<<cd.esteOcupata();
+    std::cout<<cd.getConfiguratie();
+
+    penthouse ph(2,2,100,500);
+    std::cout<<ph.getTip();
+    std::cout<<ph.esteOcupata();
+    std::cout<<ph.getDormitoare();
     return 0;
 }

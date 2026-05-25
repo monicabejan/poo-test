@@ -31,7 +31,17 @@ class cameraDouble : public camera{
 public:
     cameraDouble(int nr, int et, const std::string& config, double p=250.0) : camera(nr, et, p), tipConfiguratie(config) {}
     std::string getTip() const override { return "Double";}
+    std::string getConfiguratie() const {return tipConfiguratie;}
 
+};
+
+class penthouse: public camera {
+    int nrDormitoare;
+public:
+    penthouse(int nr, int et, int nrDorm, double p=500.0): camera(nr, et, p), nrDormitoare(nrDorm) {}
+    std::string getTip() const override {return "Penthouse";}
+    int getDormitoare() const {return nrDormitoare;}
+    
 };
 
 #endif
