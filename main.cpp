@@ -17,5 +17,6 @@ int main() {
 
     rezervare rez("ana",2);
     std::cout<<rez.getID();
+    std::cout<<rez.getNrNopti();
     return 0;
 }
