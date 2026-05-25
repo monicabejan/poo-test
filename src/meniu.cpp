@@ -47,7 +47,7 @@ void meniu::afiseazaMeniuAngajat(){
         std::cin >> optiune;
 
         if (optiune == 1) {
-            h->afiseazaCamereLibere();
+            h->afisareCamereLibere();
         } else if (optiune == 2) {
             // hotel.creeazaCamera<cameraDouble>(...)
         }
@@ -74,7 +74,7 @@ void meniu::afiseazaMeniuClient(){
         std::cin >> optiune;
 
         if (optiune == 1) {
-            h->afiseazaCamereLibere();
+            h->afisareCamereLibere();
         } else if (optiune == 2) {
             // hotel.rezervaCamerainSesiune()
         }
@@ -97,10 +97,10 @@ void meniu::ruleaza() {
             std::cin>>optiune;
 
             if (optiune == 1) login();
-            else if (optiune == 2) signUp();
+            else if (optiune == 2) signup();
             else if (optiune == 0) std::cout<<"exit\n";
         } else {
-            if (dynamic_cast<Angajat*>(utilizatorLogat) != nullptr) {
+            if (dynamic_cast<angajat*>(utilizatorLogat) != nullptr) {
                 afiseazaMeniuAngajat();
             } else {
                 afiseazaMeniuClient();
