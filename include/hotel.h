@@ -23,7 +23,14 @@ public:
   static hotel* getInstanta();
 
   void doarAsa();
-    
+
+  void afisareCamereLibere() const;
+  
+  template <typename T, typename... Args>
+    void creeazaCamera(Args&&... args){
+        auto cameraNoua=std::make_shared<T>(args...);
+        camere.push_back(cameraNoua);
+    }
 
 };
 

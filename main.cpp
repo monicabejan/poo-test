@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <memory>
 #include "../include/hotel.h"
 #include "../include/persoana.h"
 #include "../include/camera.h"
@@ -35,5 +37,9 @@ int main() {
     std::cout<<ph.getTip();
     std::cout<<ph.esteOcupata();
     std::cout<<ph.getDormitoare();
+
+    h->creeazaCamera<cameraSingle>(2,2, 200);
+    h->creeazaCamera<cameraDouble>(2,2,"matrimonial", 200);
+    h->afisareCamereLibere();
     return 0;
 }
