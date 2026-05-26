@@ -122,3 +122,13 @@ void hotel::afisareIstoricRezervari() const{
     std::cout<<rez<<"\n";
   }
 }
+
+void hotel::afisareTotalIncasari() const{
+  double total=0.0;
+  for (const auto& rez : istoricRezervari) {
+        total += rez.getCostTotal();
+  std::cout<<"\nRAPORT INCASARI\n";
+  std::cout<<"Nr total rezervari: "<<istoricRezervari.size();
+  std::cout<<"\nTotal incasari: "<<total<<" RON";
+}
+}

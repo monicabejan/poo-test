@@ -31,6 +31,8 @@ public:
 
   void proceseazaSelectieCamere(int nopti, const std::string& numeClient, const std::string& tipAbonament, const std::vector<int>& numereCamere, const std::vector<std::shared_ptr<serviciu>>& sericiiSuplimentare);
   void afisareIstoricRezervari() const;
+  void afisareTotalIncasari() const;
+  
 
   std::shared_ptr<persoana> identificareUtilizator(int idCautat, const std::string& parolaIntrodusa);
   template <typename T, typename... Args>

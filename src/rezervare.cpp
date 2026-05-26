@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& os, const rezervare& rez) {
         os<<"\n"<<cam->getNrCamera()<<" "<<cam->getTip();
       }
 
-    if(rez.serviciiAlese.empty()){
+    if(!rez.serviciiAlese.empty()){
         os<<"Servicii suplimentare : ";
         for(const auto& s: rez.serviciiAlese){
             os<<"\n";

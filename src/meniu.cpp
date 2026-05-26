@@ -70,6 +70,7 @@ void meniu::afiseazaMeniuAngajat(){
         std::cout << "1. Afiseaza toate camerele\n";
         std::cout << "2. Adauga o camera noua\n";
         std::cout << "3. Istoric rezervari\n";
+        std::cout <<"4. Vezi total incasari\n";
         std::cout << "Optiune: ";
 
         std::cin >> optiune;
@@ -123,6 +124,9 @@ void meniu::afiseazaMeniuAngajat(){
                 
             case 3:
                 h->afisareIstoricRezervari();
+                break;
+            case 4:
+                h->afisareTotalIncasari();
                 break;
             default:
                 std::cout << "Optiune invalida. Incercati din nou.\n";
