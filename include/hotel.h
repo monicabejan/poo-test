@@ -8,10 +8,11 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <memory>
 
 class hotel{
-  std::vector<std::shared_ptr<camera>> camere;
+  std::map<int, std::shared_ptr<camera>> camere;
   colectie<rezervare> istoricRezervari {"Rezervari"} ;
   colectie<std::shared_ptr<persoana>> utilizatori {"Utilizatori"};
 
@@ -39,12 +40,10 @@ public:
   template <typename T, typename... Args>
     void creeazaCamera(Args&&... args){
         auto cameraNoua=std::make_shared<T>(args...);
-      for(const auto& cam : camere){
-        if(cam->getNrCamera() == cameraNoua->getNrCamera()){
-          throw std::invalid_argument("\nExista deja o camera nu numarul "+ std::to_string(cameraNoua->getNrCamera()));
-        }
-      }
-        camere.push_back(cameraNoua);
+        int nr=cameraNoua->getNrCamera();
+        if(camere.count(nr))
+          throw std::invalid_argument("Exista deja camera "+std::to_string(nr));
+        camere[nr]=cameraNoua;
     }
 
 };

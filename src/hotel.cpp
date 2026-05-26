@@ -23,7 +23,8 @@ void hotel::afisareToateCamerele() const{
     std::cout<<"Nicio camera configurata\n";
     return;
   }
-  for(const auto& cam : camere){
+
+  for(const auto& [nr, cam] : camere){
     std::cout<<*cam;
     std::cout<<"\nStatus: "<<(cam->esteOcupata() ? "ocupata" : "libera")<<"\n";
   }
@@ -33,7 +34,7 @@ void hotel::afisareCamereLibere() const{
   std::cout<<"\nCAMERE DISPONIBILE:\n";
 
   bool existaLibere=false;
-  for(const auto& cam : camere){
+  for(const auto& [nr, cam] : camere){
     if(!cam -> esteOcupata()){
       std::cout<<*cam<<"\n";
       existaLibere=true;
@@ -58,8 +59,6 @@ std::shared_ptr<persoana> hotel::identificareUtilizator(int idCautat, const std:
 }
 
 void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, const std::string& tipAbonament, const std::vector<int>& numereCamere, const std::vector<std::shared_ptr<serviciu>>& serviciiSuplimentare){
-  (void)tipAbonament;
-  (void)serviciiSuplimentare;
   if(numereCamere.empty()) {
     throw std::invalid_argument("Selectati minim o camera");
   }
@@ -70,34 +69,27 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
   for(int nrCam: numereCamere){
 
     try{
-      std::shared_ptr<camera> cameraGasita=nullptr;
-    for(const auto& cam : camere) {
-      if(cam-> getNrCamera() == nrCam){
-        cameraGasita=cam;
-        break;
+      auto it=camere.find(nrCam);
+      if (it==camere.end()){
+        throw exceptieCameraInexistenta(nrCam);
       }
-    }
-    if(cameraGasita==nullptr) throw exceptieCameraInexistenta(nrCam);
-    if(cameraGasita->esteOcupata()) throw exceptieCameraDejaOcupata(nrCam);
-
-    rez.adaugaCamera(cameraGasita);
-    costCamere+=(nopti*cameraGasita->getPret());
-    
-  }catch (const exceptieCameraInexistenta& e){
-    std::cout<<"\nEroare "<<e.what()<<"\n";
-    throw;
+      const auto&cameraGasita=it->second;
+      if(cameraGasita->esteOcupata()){
+        throw exceptieCameraDejaOcupata(nrCam);
+      }
+      rez.adaugaCamera(cameraGasita);
+      costCamere+=(nopti*cameraGasita->getPret());
+    }catch (const exceptieCameraInexistenta& e){
+      std::cout<<"\nEroare "<<e.what()<<"\n";
+      throw;
+     }
   }
-
-  }
-
-  
 
     double costServicii=0;
     for(const auto& s : serviciiSuplimentare){
       rez.adaugaServiciu(s);
       costServicii+=s->getPret();
     }
-
 
     double reducere=0.0;
     if (tipAbonament == "Silver" || tipAbonament == "silver") reducere = 0.10;
