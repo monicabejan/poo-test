@@ -17,6 +17,18 @@ void hotel::doarAsa() {
   std::cout<<" ";
 }
 
+void hotel::afisareToateCamerele() const{
+  std::cout<<"\nTOATE CAMERELE\n";
+  if(camere.empty()){
+    std::cout<<"Nicio camera configurata\n";
+    return;
+  }
+  for(const auto& cam : camere){
+    std::cout<<*cam;
+    std::cout<<"\nStatus: "<<(cam->esteOcupata() ? "ocupata" : "libera")<<"\n";
+  }
+}
+
 void hotel::afisareCamereLibere() const{
   std::cout<<"\nCAMERE DISPONIBILE:\n";
 

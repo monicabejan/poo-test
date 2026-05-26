@@ -79,11 +79,48 @@ void meniu::afiseazaMeniuAngajat(){
                 std::cout << "\nLogging out\n";
                 break;
             case 1:
-                h->afisareCamereLibere();
+                h->afisareToateCamerele();
                 break;
-            case 2:
-                std::cout << "\n";
+            case 2:{
+                int tipCam, nr, etaj;
+                double pret;
+                std::cout<<"\nAdaugare camera noua";
+                std::cout<<"1. Single\n2. Double\n3. Penthouse\nTip: ";
+                std::cin>>tipCam;
+                std::cout<<"\nNumar camera: ";
+                std::cin>>nr;
+                std::cout<<"\nEtaj: ";
+                std::cin>>etaj;
+                std::cout<<"\nPret per noapte: ";
+                std::cin>>pret;
+
+                try{
+                    if(tipCam==1){
+                    h->creeazaCamera<cameraSingle>(nr, etaj, pret);
+                }else if(tipCam==2){
+                    std::string config;
+                    std::cout<<"\nConfiguratie (Twin/Matrimonial): ";
+                    std::cin>>config;
+                    h->creeazaCamera<cameraDouble>(nr, etaj, config, pret);
+            
+                } else if(tipCam==3){
+                    int dorm;
+                    std::cout<<"\nNumar dormitoare: ";
+                    std::cin>>dorm;
+                    h->creeazaCamera<penthouse>(nr, etaj, dorm, pret);
+                }else{
+                    std::cout<<"\nInvalid\n";
+                    break;
+                }
+                std::cout<<"\nCamera "<<nr<<" a fost creata\n";
+                }
+                catch( const std::invalid_argument& e){
+                    std::cout<<"\nEroare: "<<e.what()<<"\n";
+                }
+
                 break;
+            }
+                
             case 3:
                 h->afisareIstoricRezervari();
                 break;

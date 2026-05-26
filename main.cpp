@@ -46,7 +46,6 @@ int main() {
 
 
     h->creeazaCamera<cameraSingle>(2,2, 200);
-    h->creeazaCamera<cameraDouble>(2,2,"matrimonial", 200);
     h->afisareCamereLibere();
 
     client cli("nume", "prenume", "silver");
