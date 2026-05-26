@@ -4,6 +4,7 @@
 #include "../include/camera.h"
 #include "../include/persoana.h"
 #include "../include/rezervare.h"
+#include "../include/colectie.h"
 
 #include <iostream>
 #include <vector>
@@ -11,8 +12,8 @@
 
 class hotel{
   std::vector<std::shared_ptr<camera>> camere;
-  std::vector<rezervare> istoricRezervari;
-  std::vector<std::shared_ptr<persoana>> utilizatori;
+  colectie<rezervare> istoricRezervari {"Rezervari"} ;
+  colectie<std::shared_ptr<persoana>> utilizatori {"Utilizatori"};
 
   hotel ();
   hotel(const hotel &) = delete;

@@ -5,7 +5,7 @@
 
 hotel::hotel() {
   auto angajatImplicit = std::make_shared<angajat>("Popa", "Andrei", 4000.0);
-  utilizatori.push_back(angajatImplicit);
+  utilizatori.adauga(angajatImplicit);
 }
 
 hotel* hotel::getInstanta() {
@@ -45,7 +45,7 @@ void hotel::afisareCamereLibere() const{
 
 int hotel::adaugaClientNou( const std::string& nume, const std::string& prenume, const std::string& parola, const std::string& abonament){
   auto clientNou =std::make_shared<client>(nume, prenume, abonament, parola);
-  utilizatori.push_back(clientNou);
+  utilizatori.adauga(clientNou);
   return clientNou->getID();
 }
 
@@ -80,7 +80,7 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
     if(cameraGasita==nullptr) throw exceptieCameraInexistenta(nrCam);
     if(cameraGasita->esteOcupata()) throw exceptieCameraDejaOcupata(nrCam);
 
-    rez. adaugaCamera(cameraGasita);
+    rez.adaugaCamera(cameraGasita);
     costCamere+=(nopti*cameraGasita->getPret());
     
   }catch (const exceptieCameraInexistenta& e){
@@ -109,7 +109,7 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
     for(auto& camAlesa : rez.getCamere()) {
         camAlesa->setStatus(true);
     }
-    istoricRezervari.push_back(rez);
+    istoricRezervari.adauga(rez);
 
     std::cout<<"\nREZUMAT";
     std::cout<<"\nPret cazare: "<<costCamere<<" RON"
@@ -121,7 +121,7 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
 
 void hotel::afisareIstoricRezervari() const{
   std::cout<<"\nISTORIC REZERVARI\n";
-  if(istoricRezervari.empty()){
+  if(istoricRezervari.esteGoala()){
     std::cout<<"\nNicio rezervare inregistrata\n";
     return;
   }

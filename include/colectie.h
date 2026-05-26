@@ -22,4 +22,5 @@ public:
 
     typename std::vector<T>::const_iterator begin() const {return elemente.begin();}
     typename std::vector<T>::const_iterator end() const {return elemente.end();}
-}
+};
+#endif
