@@ -171,49 +171,83 @@ void meniu::afisareSubmeniuRezervare(){
     int optiune=0;
     int nopti=0;
 
+    std::vector<int> camereTemporare;
+    std::vector<std::shared_ptr<serviciu>> serviciiTemporare;
+
     std::cout<<"\nREZERVARE NOUA\n";
     std::cout<<"\nNr nopti: ";
     std::cin>>nopti;
 
     do {
-        h->afisareCamereLibere();
+
+        std::cout<<"\nCamere selectate pana acum: ";
+        if(camereTemporare.empty()) std::cout<<"Niciuna";
+        else for(int c: camereTemporare) std::cout<<"["<<c<<"] ";
 
         std::cout << "\nREZERVARE CURENTA\n";
+        std::cout << "0. Finalizeaza\n";
         std::cout << "1. Adauga camera la rezervare\n";
         std::cout << "2. Adauga Servicii Optionale\n";
-        std::cout << "0. Finalizeaza\n";
         std::cout << "Optiune: ";
         std::cin>>optiune;
         
         switch (optiune) {
-            case 0:
-                std::cout << "\nAfisare detalii\n";
+            case 0:{
+                try{
+                    std::string numeComplet = utilizatorLogat->getNume() + " " + utilizatorLogat->getPrenume();
+                    std::string abonament = "Regular";
+                    auto cl = std::dynamic_pointer_cast<client>(utilizatorLogat);
+                    if (cl != nullptr) {
+                        abonament = cl->getTipAbonament();
+                    }
+                    h->proceseazaSelectieCamere(nopti, numeComplet, abonament, camereTemporare, serviciiTemporare);
+                    std::cout << "\nRezervare finalizata\n";
+                }
+                catch( const std::exception& e){
+                    std::cout<<"\nEroare: "<<e.what()<<"\n";
+                    optiune=-1;
+                }
                 break;
+            }
             case 1: { 
+                h->afisareCamereLibere();
                 int nrCam;
                 std::cout << "Camera: ";
                 std::cin >> nrCam;
 
-                try {
-                    std::string numeComplet = utilizatorLogat->getNume() + " " + utilizatorLogat->getPrenume();
-                    h->proceseazaSelectieCamera(nrCam, nopti, numeComplet);
-                    
-                    std::cout << "\nCamera " << nrCam << " a fost adaugata in rezervare\n";
-                } 
-                catch (const exceptieCameraInexistenta& e) {
-                    std::cout << "\nEroare: " << e.what() << "\n";
-                } 
-                catch (const exceptieCameraDejaOcupata& e) {
-                    std::cout << "\nEroare: " << e.what() << "\n";
-                } 
-                catch (const std::invalid_argument& e) {
-                    std::cout << "\nEroare: " << e.what() << "\n";
+                bool dejaAdaugata = false;
+                for(int c : camereTemporare) {
+                    if(c == nrCam) dejaAdaugata = true;
+                }
+                if(dejaAdaugata) {
+                    std::cout<<"\nCamera deja selectata";
+                } else {
+                    camereTemporare.push_back(nrCam);
                 }
                 break;
             }
-            case 2:
-                std::cout << "\n";
+            case 2:{
+                int optServ;
+                std::cout<<"\nSERVICII\n";
+                std::cout<<"0. Inapoi\n";
+                std::cout<<"1. Mic dejun\n";
+                std::cout<<"2. All inclusive\n";
+                std::cout<<"3. Masaj\n";
+                std::cout<<"Optiune: \n";
+                std::cin>>optServ;
+
+                if (optServ == 1) {
+                    serviciiTemporare.push_back(std::make_shared<serviciuMasa>("Mic Dejun", 50.0, "mic dejun"));
+                    std::cout << "\nMic dejun adaugat\n";
+                } else if (optServ == 2) {
+                    serviciiTemporare.push_back(std::make_shared<serviciuMasa>("All Inclusive", 180.0, "all inclusive"));
+                    std::cout << "\nPachet All Inclusive adaugat\n";
+                } else if (optServ == 3) {
+                    serviciiTemporare.push_back(std::make_shared<serviciuSpa>("Masaj", 120.0, 60));
+                    std::cout << "\nSPA adaugat\n";
+                }
                 break;
+            }
             default:
                 std::cout << "\nOptiune invalida\n";
                 break;

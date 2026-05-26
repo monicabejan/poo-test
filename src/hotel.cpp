@@ -57,25 +57,58 @@ std::shared_ptr<persoana> hotel::identificareUtilizator(int idCautat, const std:
   throw exceptieAutentificareEsuata();
 }
 
-void hotel::proceseazaSelectieCamera(int nrCam, int nopti, const std::string& numeClient){
-  std::shared_ptr<camera> cameraGasita=nullptr;
+void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, const std::string& tipAbonament, const std::vector<int>& numereCamere, const std::vector<std::shared_ptr<serviciu>>& serviciiSuplimentare){
+  (void)tipAbonament;
+  (void)serviciiSuplimentare;
+  if(numereCamere.empty()) {
+    throw std::invalid_argument("Selectati minim o camera");
+  }
 
-  for(const auto& cam : camere) {
-    if(cam->getNrCamera()==nrCam){
-      cameraGasita=cam;
-      break;
+  rezervare rez(numeClient, nopti);
+  double costCamere=0.0;
+
+  for(int nrCam: numereCamere){
+    std::shared_ptr<camera> cameraGasita=nullptr;
+    for(const auto& cam : camere) {
+      if(cam-> getNrCamera() == nrCam){
+        cameraGasita=cam;
+        break;
+      }
     }
-  }
-  if(cameraGasita==nullptr){
-    throw exceptieCameraInexistenta(nrCam);
-  }
-  if(cameraGasita->esteOcupata()){
-    throw exceptieCameraDejaOcupata(nrCam);
-  }
-    rezervare rez(numeClient, nopti);
+    if(cameraGasita==nullptr) throw exceptieCameraInexistenta(nrCam);
+    if(cameraGasita->esteOcupata()) throw exceptieCameraDejaOcupata(nrCam);
 
-    cameraGasita->setStatus(true);
+    rez. adaugaCamera(cameraGasita);
+    costCamere+=(nopti*cameraGasita->getPret());
+
+  }
+
+  
+
+    double costServicii=0;
+    for(const auto& s : serviciiSuplimentare){
+      rez.adaugaServiciu(s);
+      costServicii+=s->getPret();
+    }
+
+
+    double reducere=0.0;
+    if (tipAbonament == "Silver" || tipAbonament == "silver") reducere = 0.10;
+    else if (tipAbonament == "Gold" || tipAbonament == "gold") reducere = 0.20;
+    
+    double costFinal=(costCamere+costServicii) * (1.0- reducere);
+    rez.setCostTotal(costFinal);
+
+    for(auto& camAlesa : rez.getCamere()) {
+        camAlesa->setStatus(true);
+    }
     istoricRezervari.push_back(rez);
+
+    std::cout<<"\nREZUMAT";
+    std::cout<<"\nPret cazare: "<<costCamere<<" RON"
+             <<"\nPret servicii: "<<costServicii<<" RON"
+             <<"\nReducere aplicata: "<<(reducere*100)<<"%"
+             <<"\nTotal de plata: "<<costFinal<<" RON\n";
   
 }
 

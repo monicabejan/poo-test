@@ -26,9 +26,7 @@ int main() {
     std::cout<<rez.getID();
     std::cout<<rez.getNrNopti();
 
-    serviciu s("laundry", 20);
-    std::cout<<s.getDenumire();
-    std::cout<<s.getPret();
+    
 
     cameraSingle cs(1,1,1);
     std::cout<<cs.getTip();

@@ -16,5 +16,20 @@ std::ostream& operator<<(std::ostream& os, const rezervare& rez) {
     os<<"\nRezervare #"<<rez.idRezervare
       <<"\nClient: "<<rez.numeClient
       <<"\nDurata: "<<rez.nrNopti<<" nopti\n";
+
+      os<<"\nCamere: ";
+      for(const auto& cam : rez.camereAlese){
+        os<<"\n"<<cam->getNrCamera()<<" "<<cam->getTip();
+      }
+
+    if(rez.serviciiAlese.empty()){
+        os<<"Servicii suplimentare : ";
+        for(const auto& s: rez.serviciiAlese){
+            os<<"\n";
+            s->afisareDetaliiServiciu(os);
+            os<<s->getPret()<< " RON";
+        }
+    }
+    os<<"\nCost total: "<<rez.costTotal<<" RON";
     return os;
 }

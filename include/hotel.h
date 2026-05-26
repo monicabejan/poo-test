@@ -29,7 +29,7 @@ public:
 
   int adaugaClientNou(const std::string& nume, const std::string& prenume, const std::string& parola, const std::string& tipAbonament);
 
-  void proceseazaSelectieCamera(int nrCam, int nopti, const std::string& numeClient);
+  void proceseazaSelectieCamere(int nopti, const std::string& numeClient, const std::string& tipAbonament, const std::vector<int>& numereCamere, const std::vector<std::shared_ptr<serviciu>>& sericiiSuplimentare);
   void afisareIstoricRezervari() const;
 
   std::shared_ptr<persoana> identificareUtilizator(int idCautat, const std::string& parolaIntrodusa);

@@ -14,6 +14,7 @@ public:
     int esteOcupata() const {return status;}
     int getNrCamera() const {return nrCamera;}
     void setStatus(bool st){status=st;}
+    double getPret() const { return pret;}
 
     virtual std::string getTip() const =0;
     friend std::ostream& operator<<(std::ostream& os, const camera& c); 
