@@ -12,6 +12,25 @@ rezervare::rezervare(const std::string& nume, int nopti) : numeClient(nume), nrN
     idRezervare= ++contorID;
 }
 
+rezervare::rezervare(const rezervare& other) :  numeClient(other.numeClient), nrNopti(other.nrNopti), costTotal(other.costTotal), serviciiAlese(other.serviciiAlese), camereAlese(other.camereAlese) 
+    { idRezervare=++contorID;}
+
+rezervare & rezervare::operator=(const rezervare&  other){
+    if(this!=&other){
+        numeClient=other.numeClient;
+        nrNopti=other.nrNopti;
+        costTotal=other.costTotal;
+        serviciiAlese=other.serviciiAlese;
+        camereAlese=other.camereAlese;
+    }
+    return *this;
+}
+
+std::istream& operator>>(std::istream& is, rezervare& rez) {
+     is >> rez.numeClient >> rez.nrNopti; 
+     return is;
+     }
+
 std::ostream& operator<<(std::ostream& os, const rezervare& rez) {
     os<<"\nRezervare #"<<rez.idRezervare
       <<"\nClient: "<<rez.numeClient
@@ -32,4 +51,8 @@ std::ostream& operator<<(std::ostream& os, const rezervare& rez) {
     }
     os<<"\nCost total: "<<rez.costTotal<<" RON";
     return os;
+}
+
+bool rezervare::operator==(const rezervare& other) const { 
+    return idRezervare == other.idRezervare; 
 }

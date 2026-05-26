@@ -13,7 +13,7 @@ public:
 
 class exceptieCameraDejaOcupata : public std::runtime_error {
 public:
-    explicit exceptieCameraDejaOcupata(int nr) : std::runtime_error("\nCamera "+ std::to_string(nr) + "este deja ocupata. Alegeti alta") {}
+    explicit exceptieCameraDejaOcupata(int nr) : std::runtime_error("\nCamera "+ std::to_string(nr) + " este deja ocupata. Alegeti alta") {}
 };
 
 class exceptieAutentificareEsuata : public std::runtime_error {

@@ -19,6 +19,8 @@ class rezervare{
 
 public:
     rezervare(const std::string & nume, int nopti);
+    rezervare(const rezervare& other);
+    rezervare & operator=(const rezervare&  other);
     int getID() {return idRezervare;}
     int getNrNopti() {return nrNopti;}
 
@@ -28,10 +30,14 @@ public:
     void setCostTotal(double cost) { costTotal=cost;}
     double getCostTotal() const {return costTotal;}
 
+    static int getNrTotalRezervari() { return contorID; }
+
     const std::vector<std::shared_ptr<camera>>& getCamere() const { return camereAlese; }
    // const std::vector<std::shared_ptr<serviciu>>& getServicii() const{ return serviciiAlese;}
 
+    friend std::istream& operator>>(std::istream& is, rezervare& rez);
     friend std::ostream& operator<<(std::ostream& os, const rezervare& rez);
+    bool operator==(const rezervare& other) const;
 };
 
 #endif

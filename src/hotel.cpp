@@ -68,7 +68,9 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
   double costCamere=0.0;
 
   for(int nrCam: numereCamere){
-    std::shared_ptr<camera> cameraGasita=nullptr;
+
+    try{
+      std::shared_ptr<camera> cameraGasita=nullptr;
     for(const auto& cam : camere) {
       if(cam-> getNrCamera() == nrCam){
         cameraGasita=cam;
@@ -80,6 +82,11 @@ void hotel::proceseazaSelectieCamere(int nopti, const std::string& numeClient, c
 
     rez. adaugaCamera(cameraGasita);
     costCamere+=(nopti*cameraGasita->getPret());
+    
+  }catch (const exceptieCameraInexistenta& e){
+    std::cout<<"\nEroare "<<e.what()<<"\n";
+    throw;
+  }
 
   }
 
@@ -127,8 +134,9 @@ void hotel::afisareTotalIncasari() const{
   double total=0.0;
   for (const auto& rez : istoricRezervari) {
         total += rez.getCostTotal();
+  }
   std::cout<<"\nRAPORT INCASARI\n";
-  std::cout<<"Nr total rezervari: "<<istoricRezervari.size();
+  std::cout<<"Nr total rezervari: "<<rezervare::getNrTotalRezervari();
   std::cout<<"\nTotal incasari: "<<total<<" RON";
-}
+
 }

@@ -7,6 +7,7 @@
 
 class meniu {
 private:
+    hotel *h = hotel::getInstanta();
     std::shared_ptr<persoana> utilizatorLogat=nullptr;
 
     void afiseazaMeniuInitial() const;

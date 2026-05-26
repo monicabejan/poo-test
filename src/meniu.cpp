@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-hotel *h = hotel::getInstanta();
+
 
 // void curataBuffer() {
 //     std::cin.clear();
@@ -207,7 +207,7 @@ void meniu::afisareSubmeniuRezervare(){
                     h->proceseazaSelectieCamere(nopti, numeComplet, abonament, camereTemporare, serviciiTemporare);
                     std::cout << "\nRezervare finalizata\n";
                 }
-                catch( const std::exception& e){
+                catch( const std::runtime_error& e){
                     std::cout<<"\nEroare: "<<e.what()<<"\n";
                     optiune=-1;
                 }
