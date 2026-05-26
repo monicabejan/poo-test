@@ -29,7 +29,7 @@ public:
     double getCostTotal() const {return costTotal;}
 
     const std::vector<std::shared_ptr<camera>>& getCamere() const { return camereAlese; }
-    const std::vector<std::shared_ptr<serviciu>>& getServicii() const{ return serviciiAlese;}
+   // const std::vector<std::shared_ptr<serviciu>>& getServicii() const{ return serviciiAlese;}
 
     friend std::ostream& operator<<(std::ostream& os, const rezervare& rez);
 };

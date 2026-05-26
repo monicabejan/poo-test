@@ -12,7 +12,7 @@ public:
     serviciu(const std::string& den, double pret) : denumire(den), pret(pret) {}
     virtual ~serviciu() =default;
 
-    const std::string& getDenumire() const {return denumire;}
+   // const std::string& getDenumire() const {return denumire;}
     virtual double getPret() const {return pret;}
 
     virtual void afisareDetaliiServiciu(std::ostream& os) const =0;
