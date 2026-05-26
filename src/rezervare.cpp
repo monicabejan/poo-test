@@ -17,6 +17,7 @@ rezervare::rezervare(const rezervare& other) :  numeClient(other.numeClient), nr
 
 rezervare & rezervare::operator=(const rezervare&  other){
     if(this!=&other){
+        idRezervare=other.idRezervare;
         numeClient=other.numeClient;
         nrNopti=other.nrNopti;
         costTotal=other.costTotal;
